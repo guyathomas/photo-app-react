@@ -25,9 +25,14 @@ class App extends React.Component {
   }
 
   setRating(rating) {
+    var tempPhotoLibrary = this.state.photoLibrary;
+    tempPhotoLibrary[this.state.selPhotoIndex].rating = rating
+    console.log('library', this.state.photoLibrary);
+    console.log('index', );
+    console.log('curr Rating', this.state.photoLibrary[this.state.selPhotoIndex].rating)
     this.setState({
-      photoLibrary: photoLibrary[selPhotoIndex].rating = rating
-    })
+      photoLibrary: tempPhotoLibrary
+    });
   }
 
   render() {
@@ -45,7 +50,7 @@ class App extends React.Component {
           <Favourites photos={this.state.photoLibrary} />
         </div>
         <div className={"container-fluid col-md-8"}>
-          <Viewer photo={this.state.photoLibrary[this.state.selPhotoIndex]} />
+          <Viewer photo={this.state.photoLibrary[this.state.selPhotoIndex]} setRating={this.setRating.bind(this)}/>
         </div>
       </div>
       );
