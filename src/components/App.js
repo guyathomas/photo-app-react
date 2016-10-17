@@ -14,6 +14,10 @@ class App extends React.Component {
     this.setState({selPhotoIndex: index})
   }
 
+  var sortRating = function(photos) {
+    return _.sortBy(photos, (photo) => photo.rating).reverse();
+  }
+
   setRating(rating) {
     this.setState({
       photoLibrary: photoLibrary[selPhotoIndex].rating = rating
@@ -23,8 +27,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <h1>Photo Viewer</h1>
+        <AddPhoto />
         <Album photos={this.state.photoLibrary} changePic={this.setCurrentPic.bind(this)} />
-        {/*<Viewer photo={this.state.photoLibrary[this.state.selPhotoIndex]} />*/}
+        <Favourites photos={this.state.photoLibrary} />
+        <Viewer photo={this.state.photoLibrary[this.state.selPhotoIndex]} />
       </div>
       );
     }
