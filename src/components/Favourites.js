@@ -11,7 +11,7 @@ var Favourites = (props) => {
 	return (
 		<div className="photo-favourites">
 			<h2>Favourites</h2>
-			<table>
+			<table className={"table"}>
 				<tbody>
 					<tr>
 						<th>Title</th>

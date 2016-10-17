@@ -18,6 +18,12 @@ class App extends React.Component {
     return _.sortBy(photos, (photo) => photo.rating).reverse();
   }
 
+  addPhoto (photoObj) {
+    var tempPhotoLibrary = this.state.photoLibrary;
+    tempPhotoLibrary.push(photoObj);
+    this.setState({photoLibrary:tempPhotoLibrary});
+  }
+
   setRating(rating) {
     this.setState({
       photoLibrary: photoLibrary[selPhotoIndex].rating = rating
@@ -25,18 +31,22 @@ class App extends React.Component {
   }
 
   render() {
-    console.log('this.state', this.state.photoLibrary)
     var sortedLibrary = this.sortRating(this.state.photoLibrary)
     this.state.photoLibrary = sortedLibrary;
-    console.log('this.state', this.state.photoLibrary)
 
     return (
       <div>
-        <h1>Photo Viewer</h1>
-        <AddPhoto />
-        <Album photos={this.state.photoLibrary} changePic={this.setCurrentPic.bind(this)} />
-        <Favourites photos={this.state.photoLibrary} />
-        <Viewer photo={this.state.photoLibrary[this.state.selPhotoIndex]} />
+        <div>
+          <h1>Photo Viewer</h1>
+          <AddPhoto className={"form-control"} photos={this.state.photoLibrary} addPhoto={this.addPhoto.bind(this)}/>
+        </div>
+        <div className={"container col-md-4"}>
+          <Album photos={this.state.photoLibrary} changePic={this.setCurrentPic.bind(this)} />
+          <Favourites photos={this.state.photoLibrary} />
+        </div>
+        <div className={"container-fluid col-md-8"}>
+          <Viewer photo={this.state.photoLibrary[this.state.selPhotoIndex]} />
+        </div>
       </div>
       );
     }
