@@ -9,12 +9,12 @@ class App extends React.Component {
   }
 
 
+
   setCurrentPic(index) {
-    console.log('the new index is', index)
     this.setState({selPhotoIndex: index})
   }
 
-  var sortRating = function(photos) {
+  sortRating (photos) {
     return _.sortBy(photos, (photo) => photo.rating).reverse();
   }
 
@@ -25,6 +25,11 @@ class App extends React.Component {
   }
 
   render() {
+    console.log('this.state', this.state.photoLibrary)
+    var sortedLibrary = this.sortRating(this.state.photoLibrary)
+    this.state.photoLibrary = sortedLibrary;
+    console.log('this.state', this.state.photoLibrary)
+
     return (
       <div>
         <h1>Photo Viewer</h1>
